@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "dunphyal/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "dunphyal/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappins": [
+                {
+                "hostPort": 80,
+                "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        },
+        {
+            "name": "server",
+            "image": "dunphyal/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "dunphyal/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        }
+    ]
+}
